@@ -1,0 +1,208 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $grey-body;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  >div:last-child {
+    width: 100%;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@include grid("col");
+
+.text-center {
+  text-align: center;
+}
+
+.flex-around {
+  justify-content: space-around;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.flex-content-between {
+  align-content: space-between;
+}
+
+.flex-content-end {
+  align-content: flex-end;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.cursor-progress {
+  cursor: progress;
+}
+
+.display-off {
+  display: none;
+}
+
+.prop-button {
+  margin: 20px 0;
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: $grey-title;
+  font-size: $font-size-16;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 15px 15px 10px $black;
+  transition-duration: .3s;
+}
+
+.add-board {
+  font-family: $font-roboto-regular;
+  text-transform: uppercase;
+  @extend .prop-button;
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+.board {
+  font-family: $font-roboto-bold;
+  background-image: url("../images/pexels-photo-326311.jpeg");
+  border: 5px solid $yellow-border;
+  padding: 0 20px;
+  margin: 20px 0;
+  box-shadow: 15px 15px 10px $black;
+
+  h1 {
+    color: $grey-title;
+    margin: 0;
+    padding: 20px 0;
+    text-shadow: 15px 15px 2px $black;
+  }
+
+  .create-column {
+    @extend .prop-button;
+
+    &:active {
+      box-shadow: none;
+    }
+  }
+
+  .column-container {
+    >div {
+      background-color: $orange;
+      border-radius: 25px;
+      margin: 30px 10px;
+      height: fit-content;
+    }
+
+    .column {
+      width: 200px;
+      min-height: 200px;
+      box-shadow: 15px 15px 10px $black;
+      border-radius: 25px;
+
+      >div:first-child {
+        background-color: $grey-title;
+        box-shadow: 0 1px 10px $black;
+        cursor: grab;
+
+        &:hover {
+          .btn-edit {
+            visibility: visible;
+          }
+        }
+
+        button {
+          margin: 2px;
+          padding: 0;
+          background-color: inherit;
+          border: none;
+          cursor: pointer;
+          outline: none;
+
+          img {
+            height: 15px;
+            padding-top: 2px;
+          }
+        }
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          padding: 0 5px;
+          background-color: $yellow;
+          border-bottom: 1px solid $black;
+          box-shadow: 0 -1px 10px $black;
+          cursor: grab;
+
+          &:hover {
+            .btn-edit {
+              visibility: visible;
+            }
+          }
+
+          .card {
+            p {
+              margin: 10px 0;
+            }
+
+            .btn-delete, .btn-edit {
+              background-color: inherit;
+              cursor: pointer;
+              border: none;
+              outline: none;
+
+              img {
+                padding: 0 2px 2px 0;
+                height: 14px;
+              }
+            }
+          }
+        }
+      }
+
+      .add-card {
+        border-radius: 5px;
+        background-color: $grey-title;
+        border: none;
+        margin: 10px 0;
+        outline: none;
+        cursor: pointer;
+        box-shadow: 5px 5px 10px $black;
+        transition-duration: .2s;
+
+        &:active {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}

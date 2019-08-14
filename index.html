@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="little-kanban">
+    <meta name="author" content="Rafał Pijet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>little-kanban</title>
+    <link rel="stylesheet" type="text/css" href="vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="insert"></div>
+    <div class="row flex-center">
+        <button class="add-board">Add a board</button>
+    </div>
+</div>
+<script id="board-template" type="x-tmpl-mustache">
+       <div class="board row">
+            <h1 class="col-9">{{name}}</h1>
+            <div class="col-3 row flex-end">
+                <button class="create-column">Add a column</button>
+            </div>
+            <div id={{id}} class="column-container col-12 row flex-around"></div>
+        </div>
+    </script>
+<script id="column-template" type="x-tmpl-mustache">
+        <div class="column row flex-content-between">
+             <div class="row col-12 flex-end">
+                 <button class="btn-delete">X</button>
+             </div>
+             <h2 class="column-title col-12 text-center">{{name}}</h2>
+             <div class="row col-12 flex-content-end flex-center">
+                 <ul id={{id}} class="column-card-list col-12"></ul>
+                 <button class="add-card">Add a card</button>
+             </div class="row">
+        </div>
+    </script>
+<script id="card-template" type="x-tmpl-mustache">
+        <div class="card row flex-between">
+            <p class="col-11 row card-description">{{description}}</p>
+            <button class="col-1 row btn-delete">X</button>
+        </div>
+    </script>
+<script src="vendor/mustache.js"></script>
+<script src="vendor/Sortable.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
