@@ -6,7 +6,25 @@ function Board(id, name) {
     this.element.querySelector(".board").addEventListener("click", function (event) {
 
         if (event.target.classList.contains("create-column")) {
-            self.createColumn(new Column(prompt("Enter the name of new column:")))
+            let name = prompt("Enter the name of new column:");
+            let data = new FormData();
+
+            if (name.length) {
+                data.append("name", name);
+
+                fetch(baseUrl + "/column", {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: data
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (response) {
+                        let column = new Column(response.id, name);
+                        self.createColumn(column);
+                    })
+            }
         }
     })
 }

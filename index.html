@@ -24,11 +24,13 @@
             </div>
             <div id={{id}} class="column-container col-12 row flex-around"></div>
         </div>
-    </script>
+
+</script>
 <script id="column-template" type="x-tmpl-mustache">
         <div class="column row flex-content-between">
              <div class="row col-12 flex-end">
-                 <button class="btn-delete">X</button>
+                <button class="btn-edit hidden"><img class="edit-column" src="images/edit-regular.svg" alt="sorry"></button>
+                <button class="btn-delete">X</button>
              </div>
              <h2 class="column-title col-12 text-center">{{name}}</h2>
              <div class="row col-12 flex-content-end flex-center">
@@ -36,13 +38,16 @@
                  <button class="add-card">Add a card</button>
              </div class="row">
         </div>
-    </script>
+
+</script>
 <script id="card-template" type="x-tmpl-mustache">
         <div class="card row flex-between">
-            <p class="col-11 row card-description">{{description}}</p>
+            <p class="col-10 row card-description">{{description}}</p>
+            <button class="col-1 row btn-edit hidden"><img class="edit-card" src="images/edit-regular.svg" alt="sorry"></button>
             <button class="col-1 row btn-delete">X</button>
         </div>
-    </script>
+
+</script>
 <script src="vendor/mustache.js"></script>
 <script src="vendor/Sortable.min.js"></script>
 <script src="js/Board.js"></script>

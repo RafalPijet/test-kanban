@@ -10,9 +10,36 @@ function Card(id, description, columnId) {
         if (event.target.classList.contains("btn-delete")) {
             self.removeCard();
         }
+
+        if (event.target.classList.contains("edit-card")) {
+            let newDescription = prompt("Enter new description of card:");
+
+            if (newDescription.length) {
+                let data = {name: newDescription, bootcamp_kanban_column_id: self.columnId};
+                fetch(baseUrl + "/card/" + self.id, {
+                    method: "PUT",
+                    headers: myHeadersForPUT,
+                    body: JSON.stringify(data)
+                })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function () {
+                        self.name = newDescription;
+                        self.element.querySelector(".card-description").innerText = self.name;
+                    })
+            }
+        }
     })
 }
 
 Card.prototype.removeCard = function () {
-    this.element.parentNode.removeChild(this.element);
+    let self = this;
+    fetch(baseUrl + "/card/" + self.id, {method: "DELETE", headers: myHeaders})
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function () {
+            self.element.parentNode.removeChild(self.element);
+        });
 };
