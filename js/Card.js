@@ -30,6 +30,29 @@ function Card(id, description, columnId) {
                     })
             }
         }
+    });
+    this.element.querySelector(".card").addEventListener("drop", function (event) {
+        event.stopPropagation();
+        let columnId = self.element.parentElement.id;
+        let data = new FormData();
+        data.append("name", self.description);
+        data.append("bootcamp_kanban_column_id", columnId);
+        fetch(baseUrl + "/card", {
+            method: "POST", headers: myHeaders, body: data
+        })
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (response) {
+
+            });
+        fetch(baseUrl + "/card/" + self.id, {
+            method: "DELETE",
+            headers: myHeaders
+        })
+            .then(function (response) {
+                return response.json()
+            });
     })
 }
 
