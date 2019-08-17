@@ -11,6 +11,7 @@ function Board(id, name) {
 
             if (name.length) {
                 data.append("name", name);
+                imBusy(true);
 
                 fetch(baseUrl + "/column", {
                     method: "POST",
@@ -23,6 +24,7 @@ function Board(id, name) {
                     .then(function (response) {
                         let column = new Column(response.id, name);
                         self.createColumn(column);
+                        imBusy(false);
                     })
             }
         }

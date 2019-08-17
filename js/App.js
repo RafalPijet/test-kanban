@@ -48,3 +48,27 @@ function initSortable(id, group) {
         sort: true
     })
 }
+
+function imBusy(state) {
+    let buttons = document.querySelectorAll("button");
+    let icons = document.querySelectorAll("img");
+    let container = document.querySelector(".container");
+
+    if (state) {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
+        }
+        for (let i = 0; i < icons.length; i++) {
+            icons[i].classList.add("display-off");
+        }
+        container.classList.add("cursor-progress");
+    } else {
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = false;
+        }
+        for (let i = 0; i < icons.length; i++) {
+            icons[i].classList.remove("display-off");
+        }
+        container.classList.remove("cursor-progress");
+    }
+}

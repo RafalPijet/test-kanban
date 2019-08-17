@@ -16,6 +16,7 @@ function Card(id, description, columnId) {
 
             if (newDescription.length) {
                 let data = {name: newDescription, bootcamp_kanban_column_id: self.columnId};
+                imBusy(true);
                 fetch(baseUrl + "/card/" + self.id, {
                     method: "PUT",
                     headers: myHeadersForPUT,
@@ -27,6 +28,7 @@ function Card(id, description, columnId) {
                     .then(function () {
                         self.name = newDescription;
                         self.element.querySelector(".card-description").innerText = self.name;
+                        imBusy(false);
                     })
             }
         }
@@ -58,11 +60,13 @@ function Card(id, description, columnId) {
 
 Card.prototype.removeCard = function () {
     let self = this;
+    imBusy(true);
     fetch(baseUrl + "/card/" + self.id, {method: "DELETE", headers: myHeaders})
         .then(function (response) {
             return response.json();
         })
         .then(function () {
             self.element.parentNode.removeChild(self.element);
+            imBusy(false);
         });
 };

@@ -15,6 +15,7 @@ function Column(id, name, cards) {
 
             if (newName.length) {
                 let data = {name: newName};
+                imBusy(true);
                 fetch(baseUrl + "/column/" + self.id, {
                     method: "PUT",
                     headers: myHeadersForPUT,
@@ -26,6 +27,7 @@ function Column(id, name, cards) {
                     .then(function () {
                         self.name = newName;
                         self.element.querySelector(".column-title").innerText = self.name;
+                        imBusy(false);
                     })
             }
         }
@@ -37,6 +39,7 @@ function Column(id, name, cards) {
             if (description.length) {
                 data.append("name", description);
                 data.append("bootcamp_kanban_column_id", self.id);
+                imBusy(true);
 
                 fetch(baseUrl + "/card", {
                     method: "POST",
@@ -47,7 +50,8 @@ function Column(id, name, cards) {
                         return response.json();
                     })
                     .then(function (response) {
-                        self.addCard(new Card(response.id, description, self.id))
+                        self.addCard(new Card(response.id, description, self.id));
+                        imBusy(false);
                     })
             }
         }
@@ -57,12 +61,14 @@ function Column(id, name, cards) {
 Column.prototype = {
     removeColumn: function () {
         let self = this;
+        imBusy(true);
         fetch(baseUrl + "/column/" + self.id, {method: "DELETE", headers: myHeaders})
             .then(function (response) {
                 return response.json()
             })
             .then(function () {
-                self.element.parentNode.removeChild(self.element)
+                self.element.parentNode.removeChild(self.element);
+                imBusy(false);
             })
 
     },
